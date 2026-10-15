@@ -191,7 +191,7 @@ p { margin: 0 0 1em; }
 
 /* Quem é o médico + clínica */
 .split--doctor { grid-template-columns: 5fr 7fr; }
-.split--doctor .split__media img { aspect-ratio: 4 / 5; object-position: center 15%; }
+.split--doctor .split__media img { aspect-ratio: 4 / 5; object-position: center 10%; }
 .doctor__reg { font-family: var(--font-head); font-weight: 500; font-size: 14px; letter-spacing: .04em; color: var(--gold-deep); margin-top: -6px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 56px; }
 .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }

@@ -20,6 +20,7 @@ var COLUNAS = [
   ['WhatsApp',        'whatsapp'],
   ['Procedimento',    'procedimento'],
   ['Onde mora',       'cidade'],
+  ['Consulta',        'modalidade'],
   ['Status',          'status'],
   ['utm_source',      'utm_source'],
   ['utm_medium',      'utm_medium'],

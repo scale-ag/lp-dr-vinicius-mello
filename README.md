@@ -2,8 +2,14 @@
 
 Página estática (HTML/CSS/JS puro) para gerar agendamentos da consulta de avaliação do
 [Dr. Vinícius Mello](https://drviniciusmello.com/), cirurgião plástico (contorno corporal e pós-bariátrica)
-em Goiânia – GO. A consulta custa **R$ 1.000**. O valor só aparece a partir do formulário, e a paciente
-precisa marcar que está ciente antes de enviar.
+em Goiânia – GO. Os valores só aparecem a partir do formulário, e a paciente precisa marcar que está
+ciente antes de enviar (o texto muda conforme a escolha):
+
+| Caso | Total | Sinal (abatido) | No dia |
+|---|---|---|---|
+| Consulta particular | R$ 1.000 | R$ 500 | R$ 500 |
+| Unimed (paga só o exame de bioimpedância) | R$ 300 | R$ 150 | R$ 150 |
+| Unimed + procedimento de face | sem cobrança de bioimpedância | – | – |
 
 ## Fluxo da paciente
 
@@ -21,8 +27,8 @@ Edite `assets/js/config.js`:
 
 | Campo | O que colocar |
 |---|---|
-| `VALOR_CONSULTA` | Valor da consulta (1000) |
-| `VALOR_SINAL` | Sinal para reservar (0 = sem sinal; acima de 0 mostra o quadro consulta/sinal/restante) |
+| `VALOR_CONSULTA` / `VALOR_SINAL` | Consulta particular e sinal (1000 e 500) |
+| `VALOR_BIOIMPEDANCIA` / `SINAL_BIOIMPEDANCIA` | Exame cobrado na consulta pela Unimed e sinal (300 e 150) |
 | `WHATSAPP` | Número que recebe os leads (`55` + DDD + número) |
 | `MENSAGEM_WHATSAPP` | Mensagem que já vem escrita no WhatsApp |
 | `SEGUNDOS_ATE_WHATSAPP` | Espera antes de abrir o WhatsApp (padrão 5) |
@@ -33,8 +39,8 @@ Edite `assets/js/config.js`:
 
 ## Formulário
 
-Campos atuais: nome, WhatsApp, **o que deseja tratar** e **onde mora** (provisórios até o cliente
-definir as perguntas). Para trocar/incluir um campo, atualize as mesmas chaves em três lugares:
+Campos atuais: nome, WhatsApp, **o que deseja tratar**, **particular ou Unimed** e **onde mora**.
+Se a paciente escolher Unimed + "Face ou pálpebras", a planilha registra "Unimed – face (sem bioimpedância)". Para trocar/incluir um campo, atualize as mesmas chaves em três lugares:
 `index.html` (`name="chave"`), `assets/js/main.js` (`validate()` e objeto `lead`) e
 `google-apps-script/Codigo.gs` (`COLUNAS`).
 
@@ -52,7 +58,7 @@ O código fica em `google-apps-script/Codigo.gs`. Instalação (uma vez só, com
    - Quem pode acessar: **Qualquer pessoa**
 5. **Implantar**, copie a URL que termina em `/exec` e cole em `PLANILHA_URL`.
 
-Colunas: Data/hora · Nome · WhatsApp · Procedimento · Onde mora · **Status** (lista: Novo, Em conversa,
+Colunas: Data/hora · Nome · WhatsApp · Procedimento · Onde mora · Consulta · **Status** (lista: Novo, Em conversa,
 Agendado, Consulta paga, Compareceu, Fechou cirurgia, Não respondeu, Desistiu) · utm_source · utm_medium ·
 utm_campaign · utm_content · utm_term · fbclid · gclid · Dispositivo · Página · ID do lead.
 

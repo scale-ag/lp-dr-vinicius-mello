@@ -40,7 +40,7 @@
           <ul class="hero__checks">
             <li>Especialista pela SBCP</li>
             <li>Plano cirúrgico individualizado</li>
-            <li>Atendimento humanizado</li>
+            <li>Consulta particular ou pela Unimed</li>
           </ul>
         </div>
       </div>
@@ -52,7 +52,7 @@
         <div><strong>Especialista SBCP</strong><span>Título pela Sociedade Brasileira de Cirurgia Plástica</span></div>
         <div><strong>CRM 10.251 GO · RQE 7.041</strong><span>Cirurgião plástico registrado</span></div>
         <div><strong>Contorno corporal</strong><span>Foco em pós-gestação e pós-bariátrica</span></div>
-        <div><strong>Mora em outra cidade?</strong><span>Planejamento on-line e concierge para sua estadia</span></div>
+        <div><strong>Atende Unimed</strong><span>Consulta particular ou pelo seu plano Unimed</span></div>
       </div>
     </section>
 
@@ -296,13 +296,21 @@
             <li>Tempo para tirar todas as suas dúvidas</li>
           </ul>
           <div class="offer__price">
+            <h4 class="price__title">Consulta particular</h4>
             <dl class="breakdown breakdown--dark">
-              <div class="breakdown__now"><dt>Valor da consulta de avaliação</dt><dd data-consulta>R$ 1.000</dd></div>
-              <div data-com-sinal><dt>Sinal para reservar o horário</dt><dd data-sinal></dd></div>
-              <div data-com-sinal><dt>No dia da consulta <small>(restante)</small></dt><dd data-restante></dd></div>
+              <div><dt>Valor da consulta</dt><dd data-valor="consulta">R$ 1.000</dd></div>
+              <div class="breakdown__now"><dt>Sinal para reservar o horário</dt><dd data-valor="sinal">R$ 500</dd></div>
+              <div><dt>No dia da consulta <small>(restante)</small></dt><dd data-valor="restante">R$ 500</dd></div>
             </dl>
-            <p class="breakdown__note" data-sem-sinal>Depois de enviar o formulário, nossa equipe confirma o seu horário pelo WhatsApp.</p>
-            <p class="breakdown__note" data-com-sinal>O sinal <strong>não é desconto</strong>: ele faz parte dos <span data-consulta></span> e é abatido do valor total da consulta. Você paga o sinal pelo WhatsApp, quando nossa equipe confirmar o seu horário.</p>
+            <h4 class="price__title">Consulta pela Unimed</h4>
+            <dl class="breakdown breakdown--dark">
+              <div><dt>Consulta</dt><dd class="dd--text">Pelo seu plano</dd></div>
+              <div><dt>Exame de bioimpedância</dt><dd data-valor="bio">R$ 300</dd></div>
+              <div class="breakdown__now"><dt>Sinal para reservar o horário</dt><dd data-valor="bio-sinal">R$ 150</dd></div>
+              <div><dt>No dia da consulta <small>(restante)</small></dt><dd data-valor="bio-restante">R$ 150</dd></div>
+            </dl>
+            <p class="breakdown__note">Consulta de <strong>face pela Unimed</strong>: não há cobrança de bioimpedância.</p>
+            <p class="breakdown__note">O sinal <strong>não é desconto</strong>: ele faz parte do valor total e é abatido dele. Você paga o sinal pelo WhatsApp, quando nossa equipe confirmar o seu horário.</p>
           </div>
           <p class="offer__address">Av. T-10, n. 208, sala 1210 · Ed. New Times Square · Setor Bueno · Goiânia – GO</p>
         </div>
@@ -333,6 +341,13 @@
                 <option>Ainda não sei</option>
               </select>
             </label>
+            <label>Como você quer fazer a consulta?
+              <select name="modalidade" required>
+                <option value="">Selecione</option>
+                <option value="particular">Particular</option>
+                <option value="unimed">Pela Unimed</option>
+              </select>
+            </label>
             <label>Onde você mora?
               <select name="cidade" required>
                 <option value="">Selecione</option>
@@ -343,8 +358,9 @@
             </label>
             <label class="aware">
               <input type="checkbox" name="ciente" required>
-              <span data-sem-sinal>Estou ciente de que a consulta de avaliação custa <strong data-consulta>R$ 1.000</strong>.</span>
-              <span data-com-sinal>Estou ciente de que a consulta custa <strong data-consulta></strong>. Para reservar o horário pago <strong data-sinal></strong> de sinal, que serão abatidos, e os <strong data-restante></strong> restantes no dia da consulta.</span>
+              <span data-aware="particular">Estou ciente de que a consulta particular custa <strong data-valor="consulta">R$ 1.000</strong>. Para reservar o horário pago <strong data-valor="sinal">R$ 500</strong> de sinal, que serão abatidos, e os <strong data-valor="restante">R$ 500</strong> restantes no dia da consulta.</span>
+              <span data-aware="unimed">Estou ciente de que, pela Unimed, pago apenas o exame de bioimpedância, de <strong data-valor="bio">R$ 300</strong>: <strong data-valor="bio-sinal">R$ 150</strong> de sinal para reservar o horário, que serão abatidos, e os <strong data-valor="bio-restante">R$ 150</strong> restantes no dia da consulta.</span>
+              <span data-aware="unimed-face">Estou ciente de que a consulta é pela Unimed e de que, por ser uma consulta de face, não há cobrança de bioimpedância.</span>
             </label>
             <p class="form-error" id="form-error" role="alert" hidden></p>
             <button type="submit" class="btn btn--lg btn--block">Agendar pelo WhatsApp</button>
@@ -375,7 +391,15 @@
         <div class="faq">
           <details open>
             <summary>Quanto custa a cirurgia?</summary>
-            <p>O valor da cirurgia só é definido <strong>depois da consulta de avaliação</strong>. Como cada paciente tem biotipo, objetivos e necessidades únicas, o plano cirúrgico é elaborado sob medida, e o orçamento é feito a partir dele. A consulta de avaliação custa <strong data-consulta>R$ 1.000</strong>.</p>
+            <p>O valor da cirurgia só é definido <strong>depois da consulta de avaliação</strong>. Como cada paciente tem biotipo, objetivos e necessidades únicas, o plano cirúrgico é elaborado sob medida, e o orçamento é feito a partir dele.</p>
+          </details>
+          <details>
+            <summary>Quanto custa a consulta?</summary>
+            <p><strong>Particular:</strong> <span data-valor="consulta">R$ 1.000</span>. Para reservar o horário você paga <span data-valor="sinal">R$ 500</span> de sinal, que são abatidos, e os <span data-valor="restante">R$ 500</span> restantes no dia da consulta. O sinal não é desconto: o total continua sendo <span data-valor="consulta">R$ 1.000</span>.</p>
+          </details>
+          <details>
+            <summary>Atende pela Unimed?</summary>
+            <p>Sim. Pela Unimed, a consulta é coberta pelo plano e você paga apenas o <strong>exame de bioimpedância</strong>, de <span data-valor="bio">R$ 300</span>: <span data-valor="bio-sinal">R$ 150</span> de sinal para reservar o horário e <span data-valor="bio-restante">R$ 150</span> no dia. Nas consultas de <strong>face</strong> pela Unimed não há cobrança de bioimpedância.</p>
           </details>
           <details>
             <summary>A consulta é com o próprio Dr. Vinícius?</summary>

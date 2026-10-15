@@ -6,9 +6,16 @@
  *  atualiza o site sozinho em ~1 minuto.
  */
 window.LP_CONFIG = {
-  /* Valores exibidos na página (só a partir do formulário) */
-  VALOR_CONSULTA: 1000,     // valor da consulta de avaliação (R$)
-  VALOR_SINAL: 0,           // sinal para reservar o horário (R$); 0 = sem sinal (esconde as linhas de sinal)
+  /* ---------- VALORES (só aparecem a partir do formulário) ----------
+   * Os sinais fazem parte do valor total e são abatidos dele;
+   * o restante é pago no dia da consulta. */
+  // Consulta particular
+  VALOR_CONSULTA: 1000,     // valor total da consulta particular (R$)
+  VALOR_SINAL: 500,         // sinal para reservar o horário (R$)
+  // Consulta pela Unimed: a consulta é pelo plano, a paciente paga só o exame de bioimpedância
+  VALOR_BIOIMPEDANCIA: 300, // valor total do exame (R$)
+  SINAL_BIOIMPEDANCIA: 150, // sinal para reservar o horário (R$)
+  // Exceção: consulta de face pela Unimed não cobra bioimpedância (nada a pagar)
 
   /* ---------- WHATSAPP ----------
    * Depois de preencher o formulário, a pessoa espera alguns segundos
@@ -21,7 +28,7 @@ window.LP_CONFIG = {
   /* ---------- PLANILHA (Google Sheets) ----------
    * URL do App da Web do Google Apps Script (termina em /exec).
    * Passo a passo no README, seção "Planilha de leads". */
-  PLANILHA_URL: "",
+  PLANILHA_URL: "https://script.google.com/macros/s/AKfycbze5ynuX-HcPyVyc4P1iqn0N-eekVOFWEATNnPeFnnHZIvyA0GC42X5ngIh5W-GU6O4/exec",
 
   /* ---------- RASTREAMENTO ----------
    * ID do Pixel da Meta. Dispara PageView e Lead (formulário enviado). */

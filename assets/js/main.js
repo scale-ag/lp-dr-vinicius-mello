@@ -16,13 +16,15 @@
   function track(ev, params, opts) { if (window.fbq) window.fbq("track", ev, params || {}, opts || {}); }
 
   /* ---------- Valores e links fixos ---------- */
-  var temSinal = Number(C.VALOR_SINAL) > 0;
-  $$("[data-sinal]").forEach(function (el) { el.textContent = brl(C.VALOR_SINAL); });
-  $$("[data-consulta]").forEach(function (el) { el.textContent = brl(C.VALOR_CONSULTA); });
-  $$("[data-restante]").forEach(function (el) { el.textContent = brl(C.VALOR_CONSULTA - C.VALOR_SINAL); });
-  // Trechos que só fazem sentido com sinal (ou sem ele)
-  $$("[data-com-sinal]").forEach(function (el) { if (!temSinal) el.remove(); });
-  $$("[data-sem-sinal]").forEach(function (el) { if (temSinal) el.remove(); });
+  var VALORES = {
+    consulta: C.VALOR_CONSULTA,
+    sinal: C.VALOR_SINAL,
+    restante: C.VALOR_CONSULTA - C.VALOR_SINAL,
+    bio: C.VALOR_BIOIMPEDANCIA,
+    "bio-sinal": C.SINAL_BIOIMPEDANCIA,
+    "bio-restante": C.VALOR_BIOIMPEDANCIA - C.SINAL_BIOIMPEDANCIA
+  };
+  $$("[data-valor]").forEach(function (el) { el.textContent = brl(VALORES[el.getAttribute("data-valor")]); });
   if (C.MOSTRAR_RESULTADOS === false) $$("[data-resultados]").forEach(function (el) { el.remove(); });
 
   $$("[data-whats-link]").forEach(function (el) { el.href = waLink(); el.target = "_blank"; el.rel = "noopener"; });
@@ -64,6 +66,27 @@
   var whats = form.elements.whats;
   var sent = false;
 
+  /* Particular, Unimed ou Unimed + face (sem bioimpedância): define o texto do "estou ciente" */
+  var MODALIDADES = {
+    particular: "Particular",
+    unimed: "Unimed (bioimpedância)",
+    "unimed-face": "Unimed – face (sem bioimpedância)"
+  };
+  function modalidade() {
+    var m = form.elements.modalidade.value;
+    if (m === "unimed" && /face/i.test(form.elements.procedimento.value)) return "unimed-face";
+    return m;
+  }
+  function updateAware() {
+    var m = modalidade(), aware = $(".aware", form);
+    aware.hidden = !m;
+    $$("[data-aware]", aware).forEach(function (el) { el.hidden = el.getAttribute("data-aware") !== m; });
+    form.elements.ciente.checked = false;   // mudou a escolha: confirma de novo o texto novo
+  }
+  form.elements.modalidade.addEventListener("change", updateAware);
+  form.elements.procedimento.addEventListener("change", updateAware);
+  updateAware();
+
   whats.addEventListener("input", function () {
     var d = whats.value.replace(/\D/g, "").slice(0, 11);
     var out = d;
@@ -79,8 +102,9 @@
     if (form.elements.nome.value.trim().length < 3) bad(form.elements.nome, "Informe seu nome.");
     if (whats.value.replace(/\D/g, "").length < 10) bad(whats, "Informe um WhatsApp válido com DDD.");
     if (!form.elements.procedimento.value) bad(form.elements.procedimento, "Selecione o que você deseja tratar.");
+    if (!form.elements.modalidade.value) bad(form.elements.modalidade, "Selecione se a consulta é particular ou pela Unimed.");
     if (!form.elements.cidade.value) bad(form.elements.cidade, "Selecione onde você mora.");
-    if (!form.elements.ciente.checked) bad(form.elements.ciente, "Confirme que está ciente do valor da consulta.");
+    if (form.elements.modalidade.value && !form.elements.ciente.checked) bad(form.elements.ciente, "Confirme que está ciente dos valores.");
     return msgs;
   }
 
@@ -120,6 +144,7 @@
       whatsapp: whats.value,
       procedimento: form.elements.procedimento.value,
       cidade: form.elements.cidade.value,
+      modalidade: MODALIDADES[modalidade()],
       utm_source: utms.utm_source || "",
       utm_medium: utms.utm_medium || "",
       utm_campaign: utms.utm_campaign || "",

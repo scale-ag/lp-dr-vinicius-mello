@@ -204,6 +204,9 @@ p { margin: 0 0 1em; }
 .section--offer h2 { color: var(--white); }
 .offer { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
 .offer__price { border-top: 1px solid rgba(205, 174, 85, .4); padding-top: 14px; margin-top: 10px; }
+.price__title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--gold-light); margin: 14px 0 4px; }
+.breakdown--dark .dd--text { font-family: var(--font-body); font-weight: 400; font-size: 15px; }
+.breakdown--dark .breakdown__now dd { font-size: 24px; }
 .offer__address { font-size: 15px; opacity: .8; margin-top: 18px; }
 
 .checkout { background: var(--white); color: var(--text); border-radius: 20px; padding: 32px; box-shadow: 0 30px 60px rgba(0, 0, 0, .3); }

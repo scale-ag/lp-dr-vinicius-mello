@@ -14,7 +14,7 @@ ciente antes de enviar (o texto muda conforme a escolha):
 ## Fluxo da paciente
 
 1. Lê a página (dor → por que dieta/academia não resolveram → procedimentos → como trabalhamos →
-   resultados → depoimentos → como é a consulta → quem é o médico) e preenche o formulário.
+   depoimentos → como é a consulta → quem é o médico) e preenche o formulário.
 2. Ao enviar: dispara o evento **Lead** no Pixel da Meta e o lead é gravado na **planilha** com as UTMs.
 3. Aparece uma contagem de **5 segundos** (tempo para o Lead chegar na Meta e o lead cair na planilha).
 4. Redireciona sozinho para o WhatsApp **(62) 99990-1615** com a mensagem
@@ -34,7 +34,6 @@ Edite `assets/js/config.js`:
 | `SEGUNDOS_ATE_WHATSAPP` | Espera antes de abrir o WhatsApp (padrão 5) |
 | `PLANILHA_URL` | URL `/exec` do Apps Script (veja abaixo) |
 | `META_PIXEL_ID` | ID do Pixel da Meta |
-| `MOSTRAR_RESULTADOS` | `false` esconde a seção de antes e depois |
 | `RESPOSTA_REMARCAR` | Texto da pergunta "Posso remarcar?" (vazio esconde a pergunta) |
 
 ## Formulário

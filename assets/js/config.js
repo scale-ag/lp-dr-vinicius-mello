@@ -34,11 +34,6 @@ window.LP_CONFIG = {
    * ID do Pixel da Meta. Dispara PageView e Lead (formulário enviado). */
   META_PIXEL_ID: "1601913367590883",
 
-  /* ---------- RESULTADOS (antes e depois) ----------
-   * false esconde a seção de antes e depois (útil se a Meta reprovar
-   * anúncios por causa das fotos da página de destino). */
-  MOSTRAR_RESULTADOS: true,
-
   /* ---------- REMARCAÇÃO (pergunta frequente) ----------
    * Escreva a regra do consultório. Deixe "" (vazio) para esconder a pergunta. */
   RESPOSTA_REMARCAR: ""

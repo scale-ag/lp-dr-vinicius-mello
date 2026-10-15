@@ -25,7 +25,6 @@
     "bio-restante": C.VALOR_BIOIMPEDANCIA - C.SINAL_BIOIMPEDANCIA
   };
   $$("[data-valor]").forEach(function (el) { el.textContent = brl(VALORES[el.getAttribute("data-valor")]); });
-  if (C.MOSTRAR_RESULTADOS === false) $$("[data-resultados]").forEach(function (el) { el.remove(); });
 
   $$("[data-whats-link]").forEach(function (el) { el.href = waLink(); el.target = "_blank"; el.rel = "noopener"; });
   $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
